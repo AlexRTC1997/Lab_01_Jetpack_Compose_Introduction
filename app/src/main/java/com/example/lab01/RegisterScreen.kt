@@ -24,7 +24,7 @@ fun RegisterScreen(navController: NavHostController) {
                 .fillMaxSize()
         ) {
             // [2.2] Form
-            RegisterForm(isEditing = true)
+            RegisterForm()
 
         }
     }

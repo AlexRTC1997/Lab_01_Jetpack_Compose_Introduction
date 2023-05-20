@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
@@ -35,10 +37,56 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val attendeesList = remember { mutableStateListOf<Attendee>() }
+
+                    attendeesList.add(
+                        Attendee(
+                            0,
+                            "Alex Turpo Coila",
+                            "19/05/23",
+                            "A+",
+                            "954868",
+                            "aturpoco@unsa.edu.pe",
+                            "50"
+                        )
+                    )
+                    attendeesList.add(
+                        Attendee(
+                            1,
+                            "Juan Turpo Coila",
+                            "19/05/23",
+                            "A+",
+                            "954868",
+                            "aturpoco@unsa.edu.pe",
+                            "50"
+                        )
+                    )
+                    attendeesList.add(
+                        Attendee(
+                            2,
+                            "Diego Turpo Coila",
+                            "19/05/23",
+                            "A+",
+                            "954868",
+                            "aturpoco@unsa.edu.pe",
+                            "50"
+                        )
+                    )
+                    attendeesList.add(
+                        Attendee(
+                            3,
+                            "Blanca Turpo Coila",
+                            "19/05/23",
+                            "A+",
+                            "954868",
+                            "aturpoco@unsa.edu.pe",
+                            "50"
+                        )
+                    )
 
                     // [2] Use Navigation Composable
                     val navController = rememberNavController()
-                    NavigationAppHost(navController = navController)
+                    NavigationAppHost(navController = navController, attendeesList = attendeesList)
                                     }
             }
         }
@@ -47,12 +95,12 @@ class MainActivity : ComponentActivity() {
 
 // [2] Navigation Composable
 @Composable
-fun NavigationAppHost(navController: NavHostController) {
+fun NavigationAppHost(navController: NavHostController, attendeesList: MutableList<Attendee>) {
     val context = LocalContext.current
 
     // For each route, loads a Screen
     NavHost(navController = navController, startDestination = "list") {
-        composable(Destination.List.route) { ListScreen(navController) }
+        composable(Destination.List.route) { ListScreen(navController, attendeesList) }
         composable(Destination.Register.route) { RegisterScreen(navController) }
         composable(Destination.Details.route) { navBackStackEntry -> 
             val attendeeId = navBackStackEntry.arguments?.getString("attendeeId")
@@ -60,7 +108,7 @@ fun NavigationAppHost(navController: NavHostController) {
             if (attendeeId == null) {
                 Toast.makeText(context, "Attendee ID is required", Toast.LENGTH_LONG).show()
             } else {
-                DetailsScreen(attendeeId = attendeeId.toInt())
+                DetailsScreen(attendeeId = attendeeId.toInt(), attendeesList = attendeesList)
             }
         }
     }

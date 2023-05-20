@@ -20,12 +20,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RegisterForm(
+fun DetailsForm(
+    attendee: Attendee
 //    name: String,
 //    funName: (String) -> Unit,
 //    email: String,
 //    funEmail: (String) -> Unit,
-//    isEditing: Boolean,
+//                isEditing: Boolean,
 //    funIsEditing: () -> Unit,
 //    textButton: String,
 //    funTextButton: (String) -> Unit,
@@ -40,7 +41,7 @@ fun RegisterForm(
         Text(
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.primary,
-            text = "Register Attendee"
+            text = "Edit Attendee"
         )
     }
 
@@ -51,7 +52,7 @@ fun RegisterForm(
         modifier = Modifier.fillMaxWidth(),
         onValueChange = { },
         singleLine = true,
-        value = ""
+        value = attendee.fullName
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -63,7 +64,7 @@ fun RegisterForm(
         modifier = Modifier.fillMaxWidth(),
         onValueChange = { },
         singleLine = true,
-        value = ""
+        value = attendee.registrationDate
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -75,7 +76,7 @@ fun RegisterForm(
         modifier = Modifier.fillMaxWidth(),
         onValueChange = { },
         singleLine = true,
-        value = ""
+        value = attendee.bloodType
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -87,7 +88,7 @@ fun RegisterForm(
         modifier = Modifier.fillMaxWidth(),
         onValueChange = { },
         singleLine = true,
-        value = ""
+        value = attendee.phone
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -97,9 +98,9 @@ fun RegisterForm(
         label = { Text(text = "Email: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = {  },
+        onValueChange = { },
         singleLine = true,
-        value = ""
+        value = attendee.email
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -111,10 +112,10 @@ fun RegisterForm(
         modifier = Modifier.fillMaxWidth(),
         onValueChange = { },
         singleLine = true,
-        value = ""
+        value = attendee.amountPaid
     )
 
-    Spacer(modifier = Modifier.padding(vertical = 24.dp))
+    Spacer(modifier = Modifier.padding(vertical = 16.dp))
 
     Button(
         modifier = Modifier.fillMaxWidth().height(48.dp),
