@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import kotlin.random.Random
 
 @Composable
 fun RegisterForm(attendeesList: MutableList<Attendee>, navController: NavHostController){
@@ -119,6 +120,7 @@ fun RegisterForm(attendeesList: MutableList<Attendee>, navController: NavHostCon
     Button(
         modifier = Modifier.fillMaxWidth().height(48.dp),
         onClick = {
+            // TODO: Improve Unique ID generation
             val id = attendeesList.size
             registerAttendee(id, fullName, registrationDate, bloodType, phone, email, amountPaid, attendeesList)
 
