@@ -85,3 +85,11 @@ fun registerAttendee(
     attendeesList.add(Attendee(id, fullName, registrationData, bloodType, phone, email, amountPaid))
 }
 
+fun removeAttendee(currentId: Int, attendeesList: MutableList<Attendee>) {
+    attendeesList.forEach { user ->
+        if (user.id == currentId) {
+            attendeesList.remove(user)
+        }
+    }
+}
+

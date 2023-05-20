@@ -62,7 +62,11 @@ fun ListScreen(navController: NavHostController, attendeesList: MutableList<Atte
             verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             items(attendeesList) {
-                AttendeeCard(navController = navController, attendee = it)
+                AttendeeCard(
+                    navController = navController,
+                    attendee = it,
+                    attendeesList = attendeesList
+                )
             }
         }
     }

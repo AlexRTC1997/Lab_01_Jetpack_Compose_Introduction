@@ -30,12 +30,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
 @Composable
-fun AttendeeCard(navController: NavHostController, attendee: Attendee) {
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .clip(MaterialTheme.shapes.small)
-        .background(color = MaterialTheme.colorScheme.secondaryContainer)
-        .padding(horizontal = 16.dp, vertical = 10.dp)
+fun AttendeeCard(
+    navController: NavHostController,
+    attendee: Attendee,
+    attendeesList: MutableList<Attendee>
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(MaterialTheme.shapes.small)
+            .background(color = MaterialTheme.colorScheme.secondaryContainer)
+            .padding(horizontal = 16.dp, vertical = 10.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(modifier = Modifier.weight(1f)) {
@@ -129,7 +134,9 @@ fun AttendeeCard(navController: NavHostController, attendee: Attendee) {
                 Icon(
                     Icons.Default.Edit,
                     contentDescription = "Edit",
-                    modifier = Modifier.size(28.dp).clickable {
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clickable {
                             navController.navigate(
                                 Destination.Details.createRoute(
                                     attendee.id
@@ -142,7 +149,9 @@ fun AttendeeCard(navController: NavHostController, attendee: Attendee) {
                 Icon(
                     Icons.Default.Delete,
                     contentDescription = "Edit",
-                    modifier = Modifier.size(28.dp).clickable {  },
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clickable { removeAttendee(attendee.id, attendeesList = attendeesList) },
                     tint = MaterialTheme.colorScheme.error,
                 )
             }
