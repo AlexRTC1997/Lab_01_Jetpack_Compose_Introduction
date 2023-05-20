@@ -2,8 +2,8 @@
 
 ## Details
 
-- Laboratory: 01 - Jetpack Compose Introduction
-- Student: Alex Ronaldo Turpo Coila
+- **Laboratory:** 01 - Jetpack Compose Introduction
+- **Student:** Alex Ronaldo Turpo Coila
 
 ## Statement
 
