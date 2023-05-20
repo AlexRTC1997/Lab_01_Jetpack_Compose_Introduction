@@ -18,8 +18,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.lab01.ui.theme.Lab01Theme
 
-// TODO: Fix Edit route
-
 // [1] Routes
 sealed class Destination(val route: String) {
     object List : Destination("list")
@@ -65,7 +63,11 @@ fun NavigationAppHost(navController: NavHostController, attendeesList: MutableLi
             if (attendeeId == null) {
                 Toast.makeText(context, "Attendee ID is required", Toast.LENGTH_LONG).show()
             } else {
-                DetailsScreen(attendeeId = attendeeId.toInt(), attendeesList = attendeesList)
+                DetailsScreen(
+                    attendeeId = attendeeId.toInt(),
+                    attendeesList = attendeesList,
+                    navController = navController
+                )
             }
         }
     }
@@ -85,13 +87,15 @@ fun registerAttendee(
     attendeesList.add(Attendee(id, fullName, registrationData, bloodType, phone, email, amountPaid))
 }
 
-fun editAttendee(currentId: Int, fullName: String,
-                 registrationData: String,
-                 bloodType: String,
-                 phone: String,
-                 email: String,
-                 amountPaid: String,
-                 attendeesList: MutableList<Attendee>) {
+fun editAttendee(
+    currentId: Int, fullName: String,
+    registrationData: String,
+    bloodType: String,
+    phone: String,
+    email: String,
+    amountPaid: String,
+    attendeesList: MutableList<Attendee>
+) {
     attendeesList.forEach { attendee ->
         if (attendee.id == currentId) {
             attendee.fullName = fullName

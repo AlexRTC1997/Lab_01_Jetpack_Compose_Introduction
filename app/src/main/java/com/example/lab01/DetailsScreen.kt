@@ -8,9 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @Composable
-fun DetailsScreen(attendeeId: Int, attendeesList: MutableList<Attendee>) {
+fun DetailsScreen(attendeeId: Int, attendeesList: MutableList<Attendee>, navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize().padding(20.dp, 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -19,6 +20,6 @@ fun DetailsScreen(attendeeId: Int, attendeesList: MutableList<Attendee>) {
     ) {
         val attendee = attendeesList[attendeeId]
 
-        DetailsForm(attendee = attendee)
+        DetailsForm(attendee = attendee, attendeesList = attendeesList, navController = navController)
     }
 }

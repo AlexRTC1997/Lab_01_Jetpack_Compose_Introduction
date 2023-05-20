@@ -119,15 +119,10 @@ fun RegisterForm(attendeesList: MutableList<Attendee>, navController: NavHostCon
     Button(
         modifier = Modifier.fillMaxWidth().height(48.dp),
         onClick = {
-            val id = attendeesList.size + 1
+            val id = attendeesList.size
             registerAttendee(id, fullName, registrationDate, bloodType, phone, email, amountPaid, attendeesList)
 
-            fullName = ""
-            registrationDate = ""
-            bloodType = ""
-            phone = ""
-            email = ""
-            amountPaid = ""
+            // Clean fields is not necessary
 
             navController.navigate("list")
         },

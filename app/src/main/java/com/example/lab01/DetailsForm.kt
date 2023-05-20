@@ -15,14 +15,27 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @Composable
 fun DetailsForm(
-    attendee: Attendee
+    attendee: Attendee,
+    attendeesList: MutableList<Attendee>,
+    navController: NavHostController
 ) {
+    var fullName by remember { mutableStateOf(attendee.fullName) }
+    var registrationDate by remember { mutableStateOf(attendee.registrationDate) }
+    var bloodType by remember { mutableStateOf(attendee.bloodType) }
+    var phone by remember { mutableStateOf(attendee.phone) }
+    var email by remember { mutableStateOf(attendee.email) }
+    var amountPaid by remember { mutableStateOf(attendee.amountPaid) }
 
     Row(
         modifier = Modifier.padding(0.dp, 20.dp, 0.dp, 20.dp).fillMaxWidth(),
@@ -40,9 +53,9 @@ fun DetailsForm(
         label = { Text(text = "Full Name: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { fullName = it },
         singleLine = true,
-        value = attendee.fullName
+        value = fullName
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -52,9 +65,9 @@ fun DetailsForm(
         label = { Text(text = "Registration Date: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { registrationDate = it },
         singleLine = true,
-        value = attendee.registrationDate
+        value = registrationDate
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -64,9 +77,9 @@ fun DetailsForm(
         label = { Text(text = "Blood Type: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { bloodType = it },
         singleLine = true,
-        value = attendee.bloodType
+        value = bloodType
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -76,9 +89,9 @@ fun DetailsForm(
         label = { Text(text = "Phone: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { phone = it },
         singleLine = true,
-        value = attendee.phone
+        value = phone
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -88,9 +101,9 @@ fun DetailsForm(
         label = { Text(text = "Email: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { email = it },
         singleLine = true,
-        value = attendee.email
+        value = email
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -100,9 +113,9 @@ fun DetailsForm(
         label = { Text(text = "Amount paid: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { amountPaid = it },
         singleLine = true,
-        value = attendee.amountPaid
+        value = amountPaid
     )
 
     Spacer(modifier = Modifier.padding(vertical = 16.dp))
@@ -110,14 +123,10 @@ fun DetailsForm(
     Button(
         modifier = Modifier.fillMaxWidth().height(48.dp),
         onClick = {
-//            if (isEditing) {
-//                editUser(name, email, userList)
-//                funTextButton("Save")
-//                funIsEditing()
-//            } else {
-//                registerUser(name, email, userList)
-//            }
-//            funResetFields()
+            val id = attendee.id
+            editAttendee(id, fullName, registrationDate, bloodType, phone, email, amountPaid, attendeesList)
+
+            navController.navigate("list")
         },
     ) {
         Text(color = MaterialTheme.colorScheme.primaryContainer, text = "Save")
