@@ -6,15 +6,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -33,13 +38,6 @@ fun AttendeeCard(navController: NavHostController, attendee: Attendee) {
         .clip(MaterialTheme.shapes.small)
         .background(color = MaterialTheme.colorScheme.secondaryContainer)
         .padding(horizontal = 16.dp, vertical = 10.dp)
-        .clickable {
-            navController.navigate(
-                Destination.Details.createRoute(
-                    attendee.id
-                )
-            )
-        }
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(modifier = Modifier.weight(1f)) {
@@ -113,14 +111,43 @@ fun AttendeeCard(navController: NavHostController, attendee: Attendee) {
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        Icons.Default.ShoppingCart,
+                        contentDescription = "Amount paid",
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = attendee.amountPaid,
+                        color = MaterialTheme.colorScheme.secondary,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
             }
 
-            Text(
-                text = "$ ${attendee.amountPaid}",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.primary
-            )
-
+            Column() {
+                Icon(
+                    Icons.Default.Edit,
+                    contentDescription = "Edit",
+                    modifier = Modifier.size(28.dp).clickable {
+                            navController.navigate(
+                                Destination.Details.createRoute(
+                                    attendee.id
+                                )
+                            )
+                        },
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Icon(
+                    Icons.Default.Delete,
+                    contentDescription = "Edit",
+                    modifier = Modifier.size(28.dp).clickable {  },
+                    tint = MaterialTheme.colorScheme.error,
+                )
+            }
         }
     }
 }
