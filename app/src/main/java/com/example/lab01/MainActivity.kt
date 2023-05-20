@@ -18,6 +18,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.lab01.ui.theme.Lab01Theme
 
+// TODO: Fix Edit route
+
 // [1] Routes
 sealed class Destination(val route: String) {
     object List : Destination("list")

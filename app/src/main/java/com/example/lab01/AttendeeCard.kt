@@ -118,7 +118,7 @@ fun AttendeeCard(navController: NavHostController, attendee: Attendee) {
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = attendee.amountPaid,
+                        text = "$${attendee.amountPaid}",
                         color = MaterialTheme.colorScheme.secondary,
                         style = MaterialTheme.typography.bodyMedium
                     )

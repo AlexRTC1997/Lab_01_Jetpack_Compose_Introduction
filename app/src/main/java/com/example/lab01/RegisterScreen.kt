@@ -24,7 +24,7 @@ fun RegisterScreen(navController: NavHostController, attendeesList: MutableList<
                 .fillMaxSize()
         ) {
             // [2.2] Form
-            RegisterForm(attendeesList = attendeesList)
+            RegisterForm(attendeesList = attendeesList, navController = navController)
 
         }
     }

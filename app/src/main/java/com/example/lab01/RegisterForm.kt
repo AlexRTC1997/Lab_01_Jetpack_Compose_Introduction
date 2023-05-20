@@ -22,9 +22,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @Composable
-fun RegisterForm(attendeesList: MutableList<Attendee>){
+fun RegisterForm(attendeesList: MutableList<Attendee>, navController: NavHostController){
     var fullName by remember { mutableStateOf("") }
     var registrationDate by remember { mutableStateOf("") }
     var bloodType by remember { mutableStateOf("") }
@@ -127,6 +128,8 @@ fun RegisterForm(attendeesList: MutableList<Attendee>){
             phone = ""
             email = ""
             amountPaid = ""
+
+            navController.navigate("list")
         },
     ) {
         Text(color = MaterialTheme.colorScheme.primaryContainer, text = "Save")
