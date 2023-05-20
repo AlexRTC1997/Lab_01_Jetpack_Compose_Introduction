@@ -15,23 +15,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RegisterForm(
-//    name: String,
-//    funName: (String) -> Unit,
-//    email: String,
-//    funEmail: (String) -> Unit,
-//    isEditing: Boolean,
-//    funIsEditing: () -> Unit,
-//    textButton: String,
-//    funTextButton: (String) -> Unit,
-//    userList: MutableList<User>,
-//    funResetFields: () -> Unit
-) {
+fun RegisterForm(attendeesList: MutableList<Attendee>){
+    var fullName by remember { mutableStateOf("") }
+    var registrationDate by remember { mutableStateOf("") }
+    var bloodType by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var amountPaid by remember { mutableStateOf("") }
 
     Row(
         modifier = Modifier.padding(0.dp, 20.dp, 0.dp, 20.dp).fillMaxWidth(),
@@ -49,9 +48,9 @@ fun RegisterForm(
         label = { Text(text = "Full Name: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { fullName = it },
         singleLine = true,
-        value = ""
+        value = fullName
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -61,9 +60,9 @@ fun RegisterForm(
         label = { Text(text = "Registration Date: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { registrationDate = it },
         singleLine = true,
-        value = ""
+        value = registrationDate
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -73,9 +72,9 @@ fun RegisterForm(
         label = { Text(text = "Blood Type: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { bloodType = it },
         singleLine = true,
-        value = ""
+        value = bloodType
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -85,9 +84,9 @@ fun RegisterForm(
         label = { Text(text = "Phone: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { phone = it },
         singleLine = true,
-        value = ""
+        value = phone
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -97,9 +96,9 @@ fun RegisterForm(
         label = { Text(text = "Email: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = {  },
+        onValueChange = { email = it },
         singleLine = true,
-        value = ""
+        value = email
     )
 
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
@@ -109,9 +108,9 @@ fun RegisterForm(
         label = { Text(text = "Amount paid: ") },
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = { },
+        onValueChange = { amountPaid = it },
         singleLine = true,
-        value = ""
+        value = amountPaid
     )
 
     Spacer(modifier = Modifier.padding(vertical = 24.dp))
@@ -119,14 +118,15 @@ fun RegisterForm(
     Button(
         modifier = Modifier.fillMaxWidth().height(48.dp),
         onClick = {
-//            if (isEditing) {
-//                editUser(name, email, userList)
-//                funTextButton("Save")
-//                funIsEditing()
-//            } else {
-//                registerUser(name, email, userList)
-//            }
-//            funResetFields()
+            val id = attendeesList.size + 1
+            registerAttendee(id, fullName, registrationDate, bloodType, phone, email, amountPaid, attendeesList)
+
+            fullName = ""
+            registrationDate = ""
+            bloodType = ""
+            phone = ""
+            email = ""
+            amountPaid = ""
         },
     ) {
         Text(color = MaterialTheme.colorScheme.primaryContainer, text = "Save")

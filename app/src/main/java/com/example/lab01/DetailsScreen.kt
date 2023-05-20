@@ -17,7 +17,7 @@ fun DetailsScreen(attendeeId: Int, attendeesList: MutableList<Attendee>) {
         verticalArrangement = Arrangement.SpaceEvenly
 
     ) {
-        var attendee = attendeesList[attendeeId]
+        val attendee = attendeesList[attendeeId]
 
         DetailsForm(attendee = attendee)
     }

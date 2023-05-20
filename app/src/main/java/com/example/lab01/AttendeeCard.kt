@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
@@ -33,7 +32,6 @@ import androidx.navigation.NavHostController
 @Composable
 fun AttendeeCard(navController: NavHostController, attendee: Attendee) {
     Row(modifier = Modifier
-        .padding(4.dp)
         .fillMaxWidth()
         .clip(MaterialTheme.shapes.small)
         .background(color = MaterialTheme.colorScheme.secondaryContainer)
@@ -127,7 +125,7 @@ fun AttendeeCard(navController: NavHostController, attendee: Attendee) {
                 }
             }
 
-            Column() {
+            Column {
                 Icon(
                     Icons.Default.Edit,
                     contentDescription = "Edit",

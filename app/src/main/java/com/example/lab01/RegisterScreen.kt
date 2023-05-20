@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
 @Composable
-fun RegisterScreen(navController: NavHostController) {
+fun RegisterScreen(navController: NavHostController, attendeesList: MutableList<Attendee>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -24,7 +24,7 @@ fun RegisterScreen(navController: NavHostController) {
                 .fillMaxSize()
         ) {
             // [2.2] Form
-            RegisterForm()
+            RegisterForm(attendeesList = attendeesList)
 
         }
     }

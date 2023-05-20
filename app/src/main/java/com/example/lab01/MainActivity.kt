@@ -20,9 +20,9 @@ import com.example.lab01.ui.theme.Lab01Theme
 
 // [1] Routes
 sealed class Destination(val route: String) {
-    object List: Destination("list")
-    object Register: Destination("register")
-    object Details: Destination("details/{attendeeId}") {
+    object List : Destination("list")
+    object Register : Destination("register")
+    object Details : Destination("details/{attendeeId}") {
         fun createRoute(attendeeId: Int) = "details/$attendeeId"
     }
 }
@@ -39,55 +39,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val attendeesList = remember { mutableStateListOf<Attendee>() }
 
-                    attendeesList.add(
-                        Attendee(
-                            0,
-                            "Alex Turpo Coila",
-                            "19/05/23",
-                            "A+",
-                            "954868",
-                            "aturpoco@unsa.edu.pe",
-                            "50"
-                        )
-                    )
-                    attendeesList.add(
-                        Attendee(
-                            1,
-                            "Juan Turpo Coila",
-                            "19/05/23",
-                            "A+",
-                            "954868",
-                            "aturpoco@unsa.edu.pe",
-                            "50"
-                        )
-                    )
-                    attendeesList.add(
-                        Attendee(
-                            2,
-                            "Diego Turpo Coila",
-                            "19/05/23",
-                            "A+",
-                            "954868",
-                            "aturpoco@unsa.edu.pe",
-                            "50"
-                        )
-                    )
-                    attendeesList.add(
-                        Attendee(
-                            3,
-                            "Blanca Turpo Coila",
-                            "19/05/23",
-                            "A+",
-                            "954868",
-                            "aturpoco@unsa.edu.pe",
-                            "50"
-                        )
-                    )
-
                     // [2] Use Navigation Composable
                     val navController = rememberNavController()
                     NavigationAppHost(navController = navController, attendeesList = attendeesList)
-                                    }
+                }
             }
         }
     }
@@ -101,10 +56,10 @@ fun NavigationAppHost(navController: NavHostController, attendeesList: MutableLi
     // For each route, loads a Screen
     NavHost(navController = navController, startDestination = "list") {
         composable(Destination.List.route) { ListScreen(navController, attendeesList) }
-        composable(Destination.Register.route) { RegisterScreen(navController) }
-        composable(Destination.Details.route) { navBackStackEntry -> 
+        composable(Destination.Register.route) { RegisterScreen(navController, attendeesList) }
+        composable(Destination.Details.route) { navBackStackEntry ->
             val attendeeId = navBackStackEntry.arguments?.getString("attendeeId")
-            
+
             if (attendeeId == null) {
                 Toast.makeText(context, "Attendee ID is required", Toast.LENGTH_LONG).show()
             } else {
@@ -113,3 +68,18 @@ fun NavigationAppHost(navController: NavHostController, attendeesList: MutableLi
         }
     }
 }
+
+// [3] Functions
+fun registerAttendee(
+    id: Int,
+    fullName: String,
+    registrationData: String,
+    bloodType: String,
+    phone: String,
+    email: String,
+    amountPaid: String,
+    attendeesList: MutableList<Attendee>
+) {
+    attendeesList.add(Attendee(id, fullName, registrationData, bloodType, phone, email, amountPaid))
+}
+

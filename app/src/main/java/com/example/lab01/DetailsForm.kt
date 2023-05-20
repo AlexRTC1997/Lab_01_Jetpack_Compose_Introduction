@@ -22,16 +22,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun DetailsForm(
     attendee: Attendee
-//    name: String,
-//    funName: (String) -> Unit,
-//    email: String,
-//    funEmail: (String) -> Unit,
-//                isEditing: Boolean,
-//    funIsEditing: () -> Unit,
-//    textButton: String,
-//    funTextButton: (String) -> Unit,
-//    userList: MutableList<User>,
-//    funResetFields: () -> Unit
 ) {
 
     Row(

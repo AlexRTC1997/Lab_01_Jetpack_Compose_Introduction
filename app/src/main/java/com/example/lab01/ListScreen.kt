@@ -1,5 +1,6 @@
 package com.example.lab01
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,6 +20,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
 import androidx.navigation.NavHostController
 
 @Composable
@@ -35,6 +37,24 @@ fun ListScreen(navController: NavHostController, attendeesList: MutableList<Atte
                 color = MaterialTheme.colorScheme.primary,
                 text = "Jetpack Compose Conference"
             )
+        }
+
+        if (attendeesList.isEmpty()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(MaterialTheme.shapes.small)
+                    .background(color = MaterialTheme.colorScheme.secondaryContainer)
+                    .padding(horizontal = 16.dp, vertical = 24.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    text = "No attendees yet!"
+                )
+            }
         }
 
         LazyColumn(
