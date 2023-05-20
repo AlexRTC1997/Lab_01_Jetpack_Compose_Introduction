@@ -85,6 +85,25 @@ fun registerAttendee(
     attendeesList.add(Attendee(id, fullName, registrationData, bloodType, phone, email, amountPaid))
 }
 
+fun editAttendee(currentId: Int, fullName: String,
+                 registrationData: String,
+                 bloodType: String,
+                 phone: String,
+                 email: String,
+                 amountPaid: String,
+                 attendeesList: MutableList<Attendee>) {
+    attendeesList.forEach { attendee ->
+        if (attendee.id == currentId) {
+            attendee.fullName = fullName
+            attendee.registrationDate = registrationData
+            attendee.bloodType = bloodType
+            attendee.phone = phone
+            attendee.email = email
+            attendee.amountPaid = amountPaid
+        }
+    }
+}
+
 fun removeAttendee(currentId: Int, attendeesList: MutableList<Attendee>) {
     attendeesList.forEach { user ->
         if (user.id == currentId) {
